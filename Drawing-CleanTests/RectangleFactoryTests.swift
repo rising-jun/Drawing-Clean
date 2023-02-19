@@ -27,27 +27,30 @@ class RectangleFactoryTests: XCTestCase {
         XCTAssert((rectangle != nil))
     }
 
-    func test_Unique가_randomUnique를_호출하고_형식을_확인한다() {
+    func test_RectangleFactory에서_makeRectangle을_호출하고_UniqueID의_형식을_확인한다() {
         //give
-        var unique: Unique!
+        var rectangle: Rectangle!
         let firstHipen = 3
         let secondHipen = 7
         
         //when
-        unique = Unique.randomUniqueID()
+        rectangle = rectangleFactory.makeRectangle()
+        let uniqueId = rectangle.uniqueName.id
         
         //then
-        let firstHipenIndex = unique.id.index(unique.id.startIndex, offsetBy: firstHipen)
-        let secondHipenIndex = unique.id.index(unique.id.startIndex, offsetBy: secondHipen)
-        XCTAssert((unique.id[firstHipenIndex] == "-" && unique.id[secondHipenIndex] == "-"))
+        let firstHipenIndex = uniqueId.index(uniqueId.startIndex, offsetBy: firstHipen)
+        let secondHipenIndex = uniqueId.index(uniqueId.startIndex, offsetBy: secondHipen)
+        XCTAssert((uniqueId[firstHipenIndex] == "-" && uniqueId[secondHipenIndex] == "-"))
     }
     
-    func test_Color가_randomColor를_호출하고_유효범위를_확인한다() {
+    func test_RectangleFactory에서_makeRectangle을_호출하고_color의_유효범위를_확인한다() {
         //give
+        var rectangle: Rectangle!
         var color: Color!
         
         //when
-        color = Color.randomColor()
+        rectangle = rectangleFactory.makeRectangle()
+        color = rectangle.color
         
         //then
         let result = (color.r >= 0 && color.r <= 255) && (color.g >= 0 && color.g <= 255) && (color.b >= 0 && color.b <= 255)
