@@ -7,9 +7,18 @@
 
 import Foundation
 
+protocol BoardActionSendable {
+    func boardTapped(point: Point)
+    func makeRectangleButtonTapped()
+}
+protocol PropertyChangeActionSendable {
+    func tabChangedColorButton()
+    func changedAlpha(with alpha: Float)
+}
+
 final class Plane {
-    var boardView: BoardViewController
-    var propertyChangeView: PropertyChangeViewController
+    var boardView: BoardView
+    var propertyChangeView: PropertyChangeView
     
     private var rectangles = [Rectangle]()
     private var selectedRectangle: Rectangle? {
@@ -20,7 +29,7 @@ final class Plane {
     }
     private var rectangleFactory = RectangleFactory()
     
-    init(boardView: BoardViewController, propertyChangeView: PropertyChangeViewController) {
+    init(boardView: BoardView, propertyChangeView: PropertyChangeView) {
         self.boardView = boardView
         self.propertyChangeView = propertyChangeView
     }
@@ -29,7 +38,8 @@ final class Plane {
         return rectangles[index]
     }
 }
-extension Plane {
+
+extension Plane: BoardActionSendable {
     func boardTapped(point: Point) {
         self.selectedRectangle = veryfyIsRectangleRange(by: point)
         guard let selectedRectangle = selectedRectangle else { return }
@@ -41,7 +51,8 @@ extension Plane {
         boardView.addRectangleToBoard(rectangle: rectangles[checkRectangleCount() - 1])
     }
 }
-extension Plane {
+
+extension Plane: PropertyChangeActionSendable {
     func tabChangedColorButton() {
         selectedRectangle?.changeColor()
         updateSelectedView()
