@@ -7,8 +7,12 @@
 
 import UIKit
 
+protocol PropertyChangeView {
+    func setAttributeChangeViewToSelectedRectangle(with rectangle: Rectangle)
+}
+
 final class PropertyChangeViewController: UIViewController {
-    private var plane: Plane?
+    private var plane: PropertyChangeActionSendable?
     
     private let backgroundColorLabel: UILabel = {
         let label = UILabel(frame: CGRect(x: 30.0, y: 30.0, width: 100, height: 40))
@@ -50,8 +54,9 @@ final class PropertyChangeViewController: UIViewController {
         return PropertyChangeViewController()
     }
 }
-extension PropertyChangeViewController {
-    func setPlane(plane: Plane) {
+
+extension PropertyChangeViewController: PropertyChangeView {
+    func setPlane(plane: PropertyChangeActionSendable) {
         self.plane = plane
     }
     

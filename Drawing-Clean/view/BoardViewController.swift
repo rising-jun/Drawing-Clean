@@ -7,8 +7,14 @@
 
 import UIKit
 
+protocol BoardView {
+    func addRectangleToBoard(rectangle: Rectangle)
+    func changeViewLayer(selectRectangle: Rectangle, deselectRectangle: Rectangle?)
+    func changeViewColor(selected rectangle: Rectangle)
+}
+
 class BoardViewController: UIViewController {
-    private var plane: Plane?
+    private var plane: BoardActionSendable?
     private var rectangleViews = [Rectangle: UIView]()
     
     private let addRectangleButton: UIButton = {
@@ -36,11 +42,12 @@ class BoardViewController: UIViewController {
         plane?.boardTapped(point: Point(x: x, y: y))
     }
     
-    func setPlane(plane: Plane) {
+    func setPlane(plane: BoardActionSendable) {
         self.plane = plane
     }
 }
-extension BoardViewController {
+
+extension BoardViewController: BoardView {
     func addRectangleToBoard(rectangle: Rectangle) {
         addRectangleToBoard(with: rectangle)
     }
