@@ -25,8 +25,32 @@ class Rectangle {
         self.color = color
         self.alpha = alpha
     }
+    
+    func veryfyIsRectangleRange(by point: Point) -> Bool {
+        let minX = self.point.x
+        let maxX = self.point.x + size.width
+        let minY = self.point.y
+        let maxY = self.point.y + size.height
+        return (minX <= point.x && point.x <= maxX) && (minY <= point.y && point.y <= maxY)
+    }
+    
+    func changeColor() {
+        self.color = Color.randomColor()
+    }
+    
+    func changeAlpha(with alpha: Double) {
+        self.alpha = Alpha(value: alpha)
+    }
 }
-extension Rectangle: CustomStringConvertible {
+extension Rectangle: CustomStringConvertible, Equatable, Hashable {
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(uniqueName.id)
+    }
+    
+    static func == (lhs: Rectangle, rhs: Rectangle) -> Bool {
+        lhs.uniqueName.id == rhs.uniqueName.id
+    }
+    
     var description: String {
         return """
         id : \(uniqueName), width: \(size.width),
@@ -56,8 +80,8 @@ struct Point {
 }
 extension Point {
     static func randomPoint() -> Point {
-        let xMaxValue = 470
-        let yMaxValue = 860
+        let xMaxValue = 700
+        let yMaxValue = 500
         let x = Int.random(in: 1 ..< xMaxValue)
         let y = Int.random(in: 1 ..< yMaxValue)
         return Point(x: Double(x), y: Double(y))
@@ -69,22 +93,30 @@ struct Color {
     let g: UInt8
     let b: UInt8
 }
-extension Color {
+extension Color: CustomStringConvertible {
+    static let maxValue: UInt8 = 255
     static func randomColor() -> Color {
-        let maxValue: UInt8 = 255
         let r = UInt8.random(in: 0 ..< maxValue)
         let g = UInt8.random(in: 0 ..< maxValue)
         let b = UInt8.random(in: 0 ..< maxValue)
         return Color(r: r, g: g, b: b)
+    }
+    
+    var description: String {
+        return String(describing: String(format:"%02X", Int(r)) + String(format:"%02X", Int(g)) + String(format:"%02X", Int(b)))
     }
 }
 
 struct Alpha {
     let value: Double
 }
-extension Alpha {
+extension Alpha: CustomStringConvertible {
     static func defaultAlpha() -> Alpha {
         return Alpha(value: 1.0)
+    }
+    
+    var description: String {
+        return String(describing: value)
     }
 }
 
