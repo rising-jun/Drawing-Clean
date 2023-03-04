@@ -21,6 +21,7 @@
 		72934E0C29A2045B00D93EBF /* Plane.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72934E0B29A2045B00D93EBF /* Plane.swift */; };
 		72934E0E29A20FD300D93EBF /* SplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72934E0D29A20FD300D93EBF /* SplitViewController.swift */; };
 		72934E1029A2137000D93EBF /* PropertyChangeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 72934E0F29A2137000D93EBF /* PropertyChangeViewController.swift */; };
+		7298E2A629B315B500A3600E /* PlaneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7298E2A529B315B500A3600E /* PlaneTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +60,7 @@
 		72934E0B29A2045B00D93EBF /* Plane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Plane.swift; sourceTree = "<group>"; };
 		72934E0D29A20FD300D93EBF /* SplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplitViewController.swift; sourceTree = "<group>"; };
 		72934E0F29A2137000D93EBF /* PropertyChangeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PropertyChangeViewController.swift; sourceTree = "<group>"; };
+		7298E2A529B315B500A3600E /* PlaneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaneTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -123,8 +125,10 @@
 		7231CBD929A09D6B00318F91 /* Drawing-CleanTests */ = {
 			isa = PBXGroup;
 			children = (
+				72F8523F29AF44E70055D3D6 /* mock */,
 				7231CBDA29A09D6B00318F91 /* Drawing_CleanTests.swift */,
 				7231CBF829A0AF1200318F91 /* RectangleFactoryTests.swift */,
+				7298E2A529B315B500A3600E /* PlaneTests.swift */,
 			);
 			path = "Drawing-CleanTests";
 			sourceTree = "<group>";
@@ -156,6 +160,13 @@
 				72934E0F29A2137000D93EBF /* PropertyChangeViewController.swift */,
 			);
 			path = view;
+			sourceTree = "<group>";
+		};
+		72F8523F29AF44E70055D3D6 /* mock */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = mock;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -303,6 +314,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7298E2A629B315B500A3600E /* PlaneTests.swift in Sources */,
 				7231CBF929A0AF1200318F91 /* RectangleFactoryTests.swift in Sources */,
 				7231CBDB29A09D6B00318F91 /* Drawing_CleanTests.swift in Sources */,
 			);
