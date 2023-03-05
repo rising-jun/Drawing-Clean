@@ -76,7 +76,7 @@ private extension PropertyChangeViewController {
         
         colorChangeButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
-            self.plane?.tabChangedColorButton()
+            self.plane?.tabChangedColorButtonTapped()
         }), for: .touchDown)
         
         alphaChangeSlider.addAction(UIAction(handler: { [weak self] _ in

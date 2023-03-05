@@ -14,7 +14,7 @@ final class SplitViewController: UISplitViewController {
         preferredPrimaryColumnWidthFraction = 0.2
         let boardViewController = BoardViewController.create()
         let propertyChangeViewController = PropertyChangeViewController.create()
-        let plane = Plane(boardView: boardViewController, propertyChangeView: propertyChangeViewController)
+        let plane = PlaneImpl(boardView: boardViewController, propertyChangeView: propertyChangeViewController, rectangleFactory: RectangleFactoryImpl())
         boardViewController.setPlane(plane: plane)
         propertyChangeViewController.setPlane(plane: plane)
         self.viewControllers = [propertyChangeViewController, boardViewController]

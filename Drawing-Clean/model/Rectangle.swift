@@ -93,7 +93,7 @@ struct Color {
     let g: UInt8
     let b: UInt8
 }
-extension Color: CustomStringConvertible {
+extension Color: Equatable, CustomStringConvertible {
     static let maxValue: UInt8 = 255
     static func randomColor() -> Color {
         let r = UInt8.random(in: 0 ..< maxValue)
@@ -110,7 +110,7 @@ extension Color: CustomStringConvertible {
 struct Alpha {
     let value: Double
 }
-extension Alpha: CustomStringConvertible {
+extension Alpha: Equatable, CustomStringConvertible {
     static func defaultAlpha() -> Alpha {
         return Alpha(value: 1.0)
     }
