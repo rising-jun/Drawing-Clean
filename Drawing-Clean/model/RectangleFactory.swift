@@ -7,15 +7,10 @@
 
 import Foundation
 
-final class RectangleFactory {
-    func makeRectangle() -> Rectangle {
-        return Rectangle(uniqueName: Unique.randomUniqueID(),
-                         size: Size.randomSize(),
-                         point: Point.randomPoint(),
-                         color: Color.randomColor(),
-                         alpha: Alpha.defaultAlpha())
-    }
-    
+protocol RectangleFactory {
+    func makeRectangle() -> Rectangle
+}
+final class RectangleFactoryImpl {
     private func createUniqueName() -> String {
         let uniqueWordsSize = 3
         let randomWordLength = 3
@@ -36,3 +31,13 @@ final class RectangleFactory {
         return String(randomStringElement)
     }
 }
+extension RectangleFactoryImpl: RectangleFactory {
+    func makeRectangle() -> Rectangle {
+        return Rectangle(uniqueName: Unique.randomUniqueID(),
+                         size: Size.randomSize(),
+                         point: Point.randomPoint(),
+                         color: Color.randomColor(),
+                         alpha: Alpha.defaultAlpha())
+    }
+}
+

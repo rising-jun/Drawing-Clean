@@ -12,26 +12,30 @@ protocol BoardActionSendable {
     func makeRectangleButtonTapped()
 }
 protocol PropertyChangeActionSendable {
-    func tabChangedColorButton()
+    func tabChangedColorButtonTapped()
     func changedAlpha(with alpha: Float)
 }
+typealias Plane = BoardActionSendable & PropertyChangeActionSendable
 
-final class Plane {
+final class PlaneImpl {
     var boardView: BoardView
     var propertyChangeView: PropertyChangeView
+    var rectangleFactory: RectangleFactory
     
-    private var rectangles = [Rectangle]()
-    private var selectedRectangle: Rectangle? {
+    private(set) var rectangles = [Rectangle]()
+    private(set) var selectedRectangle: Rectangle? {
         willSet(selectRectangle) {
             guard let selectRectangle = selectRectangle else { return }
             boardView.changeViewLayer(selectRectangle: selectRectangle, deselectRectangle: selectedRectangle)
         }
     }
-    private var rectangleFactory = RectangleFactory()
     
-    init(boardView: BoardView, propertyChangeView: PropertyChangeView) {
+    init(boardView: BoardView,
+         propertyChangeView: PropertyChangeView,
+         rectangleFactory: RectangleFactory) {
         self.boardView = boardView
         self.propertyChangeView = propertyChangeView
+        self.rectangleFactory = rectangleFactory
     }
     
     subscript(index: Int) -> Rectangle {
@@ -39,7 +43,7 @@ final class Plane {
     }
 }
 
-extension Plane: BoardActionSendable {
+extension PlaneImpl: BoardActionSendable {
     func boardTapped(point: Point) {
         self.selectedRectangle = veryfyIsRectangleRange(by: point)
         guard let selectedRectangle = selectedRectangle else { return }
@@ -52,8 +56,8 @@ extension Plane: BoardActionSendable {
     }
 }
 
-extension Plane: PropertyChangeActionSendable {
-    func tabChangedColorButton() {
+extension PlaneImpl: PropertyChangeActionSendable {
+    func tabChangedColorButtonTapped() {
         selectedRectangle?.changeColor()
         updateSelectedView()
     }
@@ -66,7 +70,7 @@ extension Plane: PropertyChangeActionSendable {
         updateSelectedView()
     }
 }
-private extension Plane {
+private extension PlaneImpl {
     func checkRectangleCount() -> Int {
         return rectangles.count
     }

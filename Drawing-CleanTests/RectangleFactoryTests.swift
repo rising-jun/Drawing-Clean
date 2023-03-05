@@ -13,7 +13,7 @@ class RectangleFactoryTests: XCTestCase {
     var rectangleFactory: RectangleFactory!
     
     override func setUpWithError() throws {
-        rectangleFactory = RectangleFactory()
+        rectangleFactory = RectangleFactoryImpl()
     }
 
     func test_RectangleFactory에서_makeRectangle을_호출하고_생성여부를_확인한다() {
